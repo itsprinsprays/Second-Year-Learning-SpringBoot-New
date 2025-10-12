@@ -12,17 +12,22 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class StudentRepository implements StudentImp{
 	
-	@Autowired
+	
 	private JdbcTemplate jdbcTemplate;
 	
-	private RowMapper<Student> rowMapper = (rs, column) -> 
+	@Autowired
+	public StudentRepository(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+	
+	private RowMapper<Student> rowMapper = (rs, rowNum) -> 
 				new Student(rs.getString("FullName"), rs.getString("Section"), rs.getInt("Age"), rs.getInt("SID")
 					);
 			
 	//Create
 	@Override
 	public int createStudent(Student student) {
-		String sql = "Insert into student";
+		String sql = "Insert into student (FullName, Section, Age, SID) values (?,?,?,?)";
 		return jdbcTemplate.update(sql, student.getFullName(), student.getSection(), student.getAge(), student.getID());
 	}
 	
@@ -36,10 +41,17 @@ public class StudentRepository implements StudentImp{
 	
 	//Read by ID
 	@Override
-	public Student findByID(int ID) {
+	public Student findByID(int id) {
 		String sql = "Select * from student where SID = ?";
-		return jdbcTemplate.queryForObject(sql, rowMapper, ID);
+		return jdbcTemplate.queryForObject(sql, rowMapper, id);
 	}
+	
+	//Read by Age
+	public List<Student> findByAge(int age) {
+		String sql = "Select * from student where Age = ?";
+		return jdbcTemplate.query(sql, rowMapper, age);
+	}
+	
 	
 	//Update
 	@Override
