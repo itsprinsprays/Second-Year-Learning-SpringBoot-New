@@ -31,6 +31,7 @@ public class StudentRepository implements StudentImp{
 	public List<Student> getAll() {
 		String sql = "Select * from student";
 		return jdbcTemplate.query(sql, rowMapper);
+		
 	}
 	
 	//Read by ID
@@ -47,6 +48,8 @@ public class StudentRepository implements StudentImp{
 		return jdbcTemplate.update(sql, student.getFullName(), student.getSection(), student.getAge(), student.getID());
 	}
 	
+	//Delete
+	@Override
 	public int deleteByID(int id) {
 		String sql = "Delete from student where SID = ?";
 		return jdbcTemplate.update(sql,id);
