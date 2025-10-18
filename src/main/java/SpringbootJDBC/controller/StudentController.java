@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import SpringbootJDBC.model.Student;
 import SpringbootJDBC.repository.StudentRepository;
+import SpringbootJDBC.service.StudentService;
 
 @RestController
 @RequestMapping("/students")
@@ -23,47 +24,47 @@ import SpringbootJDBC.repository.StudentRepository;
 public class StudentController {
 	
 	
-	private final StudentRepository repo;
+	private final StudentService serv;
 	
 	@Autowired
-	public StudentController(StudentRepository repo) {
-		this.repo = repo;
+	public StudentController(StudentService serv) {
+		this.serv = serv;
 	}
 	
 	@PostMapping
 	public String createStudent(@RequestBody Student student) {
-		 repo.createStudent(student);
+		 serv.createStudent(student);
 		 return "New Student Added";
 	}
 	
 	@GetMapping("/{id}")
 	public Student getStudentByID(@PathVariable int id) { 
-		return repo.findByID(id);
+		return serv.findByID(id);
 	}
 	
 	@GetMapping
 	public List<Student> getAllStudents() {
-		return repo.getAll();
+		return serv.getAllStudents();
 	}
 	
-	@GetMapping("/students")
+	@GetMapping("/filter")
 	public List<Student> getStudents(@RequestParam(required = false) Integer age) {
 	    if (age != null) {
-	        return repo.findByAge(age);
+	        return serv.findByAge(age);
 	    }
-	    return repo.getAll();
+	    return serv.getAllStudents();
 	}
 	
 	@PutMapping("/{id}")
 	public String updateStudent(@PathVariable int id, @RequestBody Student student) {
 		student.setID(id);
-		repo.updateStudent(student);
+		serv.updateStudent(student);
 		return id + " is updated";
 	}
 	
 	@DeleteMapping("/{id}")
 	public String deleteStudent(@PathVariable int id) {
-		 repo.deleteByID(id);
+		serv.deleteStudent(id);
 		 return id + " is deleted";
 	}
 	
