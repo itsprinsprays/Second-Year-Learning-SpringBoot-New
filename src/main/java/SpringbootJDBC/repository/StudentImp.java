@@ -7,7 +7,7 @@ import SpringbootJDBC.model.Student;
 
 public interface StudentImp {
 	
-	int createStudent(Student student);
+	 int createStudent(Student student);
 	 List<Student> getAll();
 	 Student findByID(int ID);
 	 int updateStudent(Student student);

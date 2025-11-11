@@ -20,7 +20,7 @@ import SpringbootJDBC.service.StudentService;
 
 @RestController
 @RequestMapping("/students")
-@CrossOrigin (origins = "*")
+@CrossOrigin (origins  = "*")
 public class StudentController {
 	
 	
