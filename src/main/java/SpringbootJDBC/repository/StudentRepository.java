@@ -52,7 +52,6 @@ public class StudentRepository implements StudentImp{
 		return jdbcTemplate.query(sql, rowMapper, age);
 	}
 	
-	
 	//Update
 	@Override
 	public int updateStudent(Student student) {

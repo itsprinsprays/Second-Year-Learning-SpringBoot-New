@@ -2,8 +2,9 @@ package SpringbootJDBC1.model;
 
 public class Customer {
 	
-	private String customerName, paymentMethod;
+	private String customerName;
 	private int orderNumber;
+	private String paymentMethod;
 	
 	public Customer(String customerName, int orderNumber, String paymentMethod) {
 		this.customerName = customerName;

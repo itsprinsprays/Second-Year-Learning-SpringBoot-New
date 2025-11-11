@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import SpringbootJDBC1.model.Customer;
 
+@Repository
 public class CustomerRepository implements CustomerImp {
 	
 	private JdbcTemplate jdbcTemplate;
