@@ -3,9 +3,10 @@ package SpringbootJDBC2.model;
 public class Book {
 	
 	private String bookTitle, bookAuthor;
-	private int yearPublish,bookID;
+	private int bookID;
+	private Integer yearPublish;
 	
-	public Book(String bookTitle, String bookAuthor, int yearPublish,int bookID) {
+	public Book(String bookTitle, String bookAuthor, Integer yearPublish,int bookID) {
 		this.bookTitle = bookTitle;
 		this.bookAuthor = bookAuthor;
 		this.yearPublish = yearPublish;
@@ -14,7 +15,7 @@ public class Book {
 	
 	public String getBookTitle() { return bookTitle; }
 	public String getBookAuthor() { return bookAuthor; }
-	public int getYearPublish() { return yearPublish; }
+	public Integer getYearPublish() { return yearPublish; }
 	public int getBookID() { return bookID; }
 	
 	public void setBookTitle(String bookTitle) { this.bookTitle = bookTitle; }

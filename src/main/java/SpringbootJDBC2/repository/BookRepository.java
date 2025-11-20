@@ -1,5 +1,6 @@
 package SpringbootJDBC2.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,32 @@ public class BookRepository implements BookImp{
 		String sql = "Update Book set BookTitle = ?, BookAuthor = ?, YearPublish = ? where BookID = ?";
 		return jdbcTemplate.update(sql, book.getBookTitle(), book.getBookAuthor(), book.getYearPublish(), book.getBookID());
 	}
+	
+	  // Partial update method
+    public int UpdateBookPartial(Book book) {
+        StringBuilder sql = new StringBuilder("UPDATE Book SET ");
+        List<Object> params = new ArrayList<>();
+
+        if (book.getBookTitle() != null) {
+            sql.append("BookTitle = ?, ");
+            params.add(book.getBookTitle());
+        }
+        if (book.getBookAuthor() != null) {
+            sql.append("BookAuthor = ?, ");
+            params.add(book.getBookAuthor());
+        }
+        if (book.getYearPublish() != null) {
+            sql.append("YearPublish = ?, ");
+            params.add(book.getYearPublish());
+        }
+
+        // Remove last comma
+        sql.setLength(sql.length() - 2);
+        sql.append(" WHERE BookID = ?");
+        params.add(book.getBookID());
+
+        return jdbcTemplate.update(sql.toString(), params.toArray());
+    }
 	
 	@Override
 	public int DeleteBookByID(int ID) {

@@ -40,6 +40,14 @@ public class BookService {
 		return "Book Info Updated";
 	}
 	
+	public String partialUpdateBook(Book book) {
+		int rows = repo.UpdateBookPartial(book);
+		if(rows == 0) {
+			throw new RuntimeException("Book ID Not Found : " + book.getBookID());
+		}
+		return "Book ID : " + book.getBookID() + " is Updated";
+	}
+	
 	public String deleteBookByID(int ID) {
 		repo.DeleteBookByID(ID);
 		return "Book Deleted";

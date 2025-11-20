@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -41,7 +42,7 @@ public class BookController {
 	}
 	
 	@GetMapping("/{IDFilter}")
-	public Book getBookByID(@RequestParam int ID) {
+	public Book getBookByID(@RequestParam int ID) { 
 		return serv.getBookByID(ID);
 	}
 	
@@ -50,6 +51,13 @@ public class BookController {
 		book.setBookID(ID);
 		serv.updateBook(book);
 		return "ID : " + ID + " Updated";
+	}
+	
+	@PatchMapping("/{ID}") 
+	public String partialUpdate(@PathVariable int ID, @RequestBody Book book) {
+		book.setBookID(ID);
+		serv.partialUpdateBook(book);
+		return "Updated";
 	}
 	
 	@DeleteMapping("/{ID}")
