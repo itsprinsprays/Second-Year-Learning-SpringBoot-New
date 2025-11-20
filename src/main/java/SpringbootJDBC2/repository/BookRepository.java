@@ -2,6 +2,7 @@ package SpringbootJDBC2.repository;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -13,14 +14,19 @@ public class BookRepository implements BookImp{
 	
 	private JdbcTemplate jdbcTemplate;
 	
+	@Autowired
+	public BookRepository(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+	
 	private RowMapper<Book> rowMapper = (rs, column) ->
 	 			new Book(rs.getString("BookTitle"),rs.getString("BookAuthor"),rs.getInt("YearPublish"), rs.getInt("BookID")
 	 		);
 	 			
 	@Override
-	public int CreateBook(Book book) {
-		String sql = "Insert into Book (BookTitle, BookAuthor, YearPublish, BookID)";
-		return jdbcTemplate.update(sql, book.getBookTitle(), book.getBookTitle(), book.getYearPublish(), book.getBookID());
+	public int createBook(Book book) {
+		String sql = "Insert into Book (BookTitle, BookAuthor, YearPublish, BookID) values (?,?,?,?)";
+		return jdbcTemplate.update(sql, book.getBookTitle(), book.getBookAuthor(), book.getYearPublish(), book.getBookID());
 	}
 	
 	@Override
@@ -30,14 +36,14 @@ public class BookRepository implements BookImp{
 	}
 	
 	@Override
-	public Book getBookbyID(int ID) {
+	public Book getBookByID(int ID) {
 		String sql = "Select * from Book where BookID = ?";
 		return jdbcTemplate.queryForObject(sql, rowMapper, ID);
 	}
 	
 	@Override
 	public int UpdateBook(Book book) {
-		String sql = "Update Book set BookTitle = ?, BookAuthor = ?, YearPublish = ?, BookID = ?";
+		String sql = "Update Book set BookTitle = ?, BookAuthor = ?, YearPublish = ? where BookID = ?";
 		return jdbcTemplate.update(sql, book.getBookTitle(), book.getBookAuthor(), book.getYearPublish(), book.getBookID());
 	}
 	

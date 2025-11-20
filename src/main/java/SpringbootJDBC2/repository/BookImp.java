@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface BookImp {
 
-	int CreateBook(Book book);
+	int createBook(Book book);
 	List<Book> getAllBook();
 	Book getBookByID(int ID);
 	int UpdateBook(Book book);
