@@ -2,13 +2,13 @@ package SpringbootJDBC3.SportRepository;
 
 import java.util.List;
 
-import SpringbootJDBC3.AthleteModel.Athlete;
 import SpringbootJDBC3.SportModel.Sport;
+import SpringbootJDBC3.AthleteModel.Athlete;
 
 public interface SportImp {
 	
-	Sport createSport(Sport sport);
-	List<Sport> getAllSport();
+	int createSport(Sport sport);
+	List<Sport> getAllSports();
 	Sport getSportByID(int ID);
 	List<Athlete> getAllAthletes();
 	int updateSport(Sport sport);
