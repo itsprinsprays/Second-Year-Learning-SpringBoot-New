@@ -5,10 +5,10 @@ import java.util.List;
 
 public interface AthleteImp {
 	
-	Athlete createAthlete(Athlete athlete);
+	int createAthlete(Athlete athlete);
 	List<Athlete> getAllAthlete();
-	Athlete getAtheleteByID(int ID);
-	int updateAthelete(Athlete athlete);
+	Athlete getAthleteByID(int ID);
+	int updateAthlete(Athlete athlete);
 	int deleteAthleteByID(int ID);
 	
 }
