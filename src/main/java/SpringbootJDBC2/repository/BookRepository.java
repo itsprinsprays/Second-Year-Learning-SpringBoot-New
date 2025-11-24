@@ -48,8 +48,8 @@ public class BookRepository implements BookImp{
 		return jdbcTemplate.update(sql, book.getBookTitle(), book.getBookAuthor(), book.getYearPublish(), book.getBookID());
 	}
 	
-	  // Partial update method
-    public int UpdateBookPartial(Book book) {
+	 @Override
+    public int partialUpdate(Book book) {
         StringBuilder sql = new StringBuilder("UPDATE Book SET ");
         List<Object> params = new ArrayList<>();
 

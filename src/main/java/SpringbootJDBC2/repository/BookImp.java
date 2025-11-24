@@ -9,6 +9,7 @@ public interface BookImp {
 	List<Book> getAllBook();
 	Book getBookByID(int ID);
 	int UpdateBook(Book book);
+	int partialUpdate(Book book);
 	int DeleteBookByID(int ID);
 	
 }

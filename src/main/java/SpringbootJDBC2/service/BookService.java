@@ -41,7 +41,7 @@ public class BookService {
 	}
 	
 	public String partialUpdateBook(Book book) {
-		int rows = repo.UpdateBookPartial(book);
+		int rows = repo.partialUpdate(book);
 		if(rows == 0) {
 			throw new RuntimeException("Book ID Not Found : " + book.getBookID());
 		}
