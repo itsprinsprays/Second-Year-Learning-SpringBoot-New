@@ -2,22 +2,26 @@ package SpringbootJDBC3.AthleteRepository;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import SpringbootJDBC3.AthleteModel.Athlete;
 
+@Repository
 public class AthleteRepository implements AthleteImp{
 	
 	private JdbcTemplate jdbcTemplate;
 	
+	@Autowired
 	public AthleteRepository(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
 	private RowMapper<Athlete> athleteRowMapper = (rs, column) ->
 		new Athlete(rs.getInt("athlete_id"), 
-				    rs.getString("athlete_Name"), 
+				    rs.getString("athlete_name"), 
 				    rs.getInt("age"),
 				    rs.getInt("sport_id")
 				);
@@ -43,13 +47,13 @@ public class AthleteRepository implements AthleteImp{
 	
 	@Override
 	public int updateAthlete(Athlete athlete) {
-		String sql = "UPDATE athlete set athlete_name = ? , age = ?";
-		return jdbcTemplate.update(sql, athlete.getAthleteName(), athlete.getAge());
+		String sql = "UPDATE athlete set athlete_name = ? , age = ? where athlete_id = ?";
+		return jdbcTemplate.update(sql, athlete.getAthleteName(), athlete.getAge(), athlete.getAthleteID());
 	}
 	
 	@Override
 	public int deleteAthleteByID(int ID) {
-		String sql = "DELETE athlete where athlete_id = ?";
+		String sql = "DELETE FROM athlete where athlete_id = ?";
 		return jdbcTemplate.update(sql,ID);
 	}
 	

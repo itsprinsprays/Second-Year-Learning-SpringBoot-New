@@ -21,11 +21,15 @@ public class SportRepository implements SportImp{
 	}
 	
 	private RowMapper<Sport> sportRowMapper = (rs, column) ->
-		new Sport(rs.getInt("sport_id"), rs.getString("sport_name")
+		new Sport(rs.getInt("sport_id"),
+				  rs.getString("sport_name")
 				);
 		
 	private RowMapper<Athlete> athleteRowMapper = (rs, column) ->
-		new Athlete(rs.getInt("athlete_id"), rs.getString("athlete_name"), rs.getInt("age"), rs.getInt("sport_id"));
+		new Athlete(rs.getInt("athlete_id"),
+				    rs.getString("athlete_name"), 
+				    rs.getInt("age"),
+				    rs.getInt("sport_id"));
 	
 	@Override
 	public int createSport(Sport sport) {
@@ -41,9 +45,11 @@ public class SportRepository implements SportImp{
 	
 	@Override
 	public Sport getSportByID(int ID) {
-		String sql = "SELECT * FROM sport WHERE sport_id = ?";	
-		return jdbcTemplate.queryForObject(sql, sportRowMapper,ID);
+	    String sql = "SELECT * FROM sport WHERE sport_id = ?";
+	    List<Sport> results = jdbcTemplate.query(sql, sportRowMapper, ID);
+	    return results.isEmpty() ? null : results.get(0);
 	}
+
 	
 	@Override
 	public List<Athlete> getAllAthletes() {
@@ -51,11 +57,13 @@ public class SportRepository implements SportImp{
 		return jdbcTemplate.query(sql, athleteRowMapper);
 	}
 	
+	@Override
 	public int updateSport(Sport sport) {
 		String sql = "UPDATE sport set sport_name = ? where sport_id = ?";
 		return jdbcTemplate.update(sql, sport.getSportName(), sport.getSportID());
 	}
 	
+	@Override
 	public int deleteSportByID(int ID) {
 		String sql = "DELETE FROM sport WHERE sport_id = ?";
 		return jdbcTemplate.update(sql,ID);
