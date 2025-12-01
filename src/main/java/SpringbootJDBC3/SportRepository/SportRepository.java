@@ -43,6 +43,11 @@ public class SportRepository implements SportImp{
 		return jdbcTemplate.query(sql, sportRowMapper);
 	}
 	
+	public String getSportNameByID(int ID) {
+		String sql = "SELECT sport_name from sport where sport_ID = ?";
+		return jdbcTemplate.queryForObject(sql, String.class , ID);
+	}
+	
 	@Override
 	public Sport getSportByID(int ID) {
 	    String sql = "SELECT * FROM sport WHERE sport_id = ?";

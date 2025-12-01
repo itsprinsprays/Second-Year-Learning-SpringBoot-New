@@ -53,7 +53,7 @@ public class CRUDController {
 	}
 	
 	@DeleteMapping("/{ID}")
-	public int deleteSportByID(@PathVariable int ID) {
+	public String deleteSportByID(@PathVariable int ID) {
 		return sService.deleteSportByID(ID);
 	}
 	
