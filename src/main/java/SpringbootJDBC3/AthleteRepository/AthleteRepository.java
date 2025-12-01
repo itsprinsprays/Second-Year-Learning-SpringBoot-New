@@ -42,7 +42,8 @@ public class AthleteRepository implements AthleteImp{
 	@Override
 	public Athlete getAthleteByID(int ID) {
 		String sql = "SELECT * from athlete where athlete_id = ?";
-		return jdbcTemplate.queryForObject(sql, athleteRowMapper, ID);
+		List<Athlete> result =  jdbcTemplate.query(sql, athleteRowMapper, ID);
+		return result.isEmpty() ? null : result.get(0);
 	}
 	
 	@Override

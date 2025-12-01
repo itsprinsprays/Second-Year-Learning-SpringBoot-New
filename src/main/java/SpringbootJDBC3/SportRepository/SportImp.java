@@ -10,6 +10,7 @@ public interface SportImp {
 	int createSport(Sport sport);
 	List<Sport> getAllSports();
 	Sport getSportByID(int ID);
+	Sport getSportByName(String sportName);
 	List<Athlete> getAllAthletes();
 	int updateSport(Sport sport);
 	int deleteSportByID(int ID);

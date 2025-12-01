@@ -10,12 +10,12 @@ import SpringbootJDBC3.SportModel.Sport;
 import SpringbootJDBC3.SportRepository.SportRepository;
 
 @Service
-public class SportCRUDService {
+public class SportAthleteCRUDService {
 	
 	SportRepository sRepo;
 	AthleteRepository aRepo;
 	
-	public SportCRUDService(SportRepository sRepo, AthleteRepository aRepo) {
+	public SportAthleteCRUDService(SportRepository sRepo, AthleteRepository aRepo) {
 		this.sRepo = sRepo;
 		this.aRepo = aRepo;
 	}
@@ -41,6 +41,14 @@ public class SportCRUDService {
 			System.out.print("Sport ID : " + ID + " is not existing");
 		}
 		return check;
+	}
+	
+	public Sport getSportByName(String sportName) {
+		Sport name = sRepo.getSportByName(sportName);
+		if(name == null) {
+			System.out.print("Sport Name : " + sportName + " is not existing");
+		}
+		return name;
 	}
 	
 	public int updateSport(Sport sport) {
