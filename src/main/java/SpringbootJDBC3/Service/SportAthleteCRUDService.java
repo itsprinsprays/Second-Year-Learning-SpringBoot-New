@@ -43,13 +43,6 @@ public class SportAthleteCRUDService {
 		return check;
 	}
 	
-	public Sport getSportByName(String sportName) {
-		Sport name = sRepo.getSportByName(sportName);
-		if(name == null) {
-			System.out.print("Sport Name : " + sportName + " is not existing");
-		}
-		return name;
-	}
 	
 	public int updateSport(Sport sport) {
 		return sRepo.updateSport(sport);

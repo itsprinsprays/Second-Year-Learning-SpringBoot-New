@@ -44,10 +44,6 @@ public class CRUDController {
 		return sService.getSportByID(ID);
 	}
 	
-	@GetMapping("/name/{sportName}")
-	public Sport getSportByName(@PathVariable String sportName) {
-		return sService.getSportByName(sportName);
-	}
 	
 	@PutMapping("/{ID}")
 	public String updateSport(@PathVariable int ID, @RequestBody Sport sport) {

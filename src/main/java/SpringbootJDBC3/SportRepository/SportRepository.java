@@ -50,11 +50,6 @@ public class SportRepository implements SportImp{
 	    return results.isEmpty() ? null : results.get(0);
 	}
 	
-	@Override
-	public Sport getSportByName(String sportName) {
-		String sql = "SELECT sport_name FROM sport where sport_name = ?";
-		return jdbcTemplate.queryForObject(sql, sportRowMapper, sportName);
-	}
 
 	
 	@Override
