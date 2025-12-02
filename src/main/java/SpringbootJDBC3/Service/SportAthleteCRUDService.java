@@ -6,14 +6,18 @@ import org.springframework.stereotype.Service;
 
 import SpringbootJDBC3.AthleteModel.Athlete;
 import SpringbootJDBC3.AthleteRepository.AthleteRepository;
+import SpringbootJDBC3.Exception.AthleteIsExistingException;
+import SpringbootJDBC3.Exception.AthleteNotFoundException;
+import SpringbootJDBC3.Exception.SportIsExistingException;
+import SpringbootJDBC3.Exception.SportNotFoundException;
 import SpringbootJDBC3.SportModel.Sport;
 import SpringbootJDBC3.SportRepository.SportRepository;
 
 @Service
 public class SportAthleteCRUDService {
 	
-	SportRepository sRepo;
-	AthleteRepository aRepo;
+	private final SportRepository sRepo;
+	private final AthleteRepository aRepo;
 	
 	public SportAthleteCRUDService(SportRepository sRepo, AthleteRepository aRepo) {
 		this.sRepo = sRepo;
@@ -25,7 +29,7 @@ public class SportAthleteCRUDService {
 	public String createSport(Sport sport) {
 		 Sport check = sRepo.getSportByID(sport.getSportID());
 		 if(check != null) {
-			return ("Sport ID : " + sport.getSportID() + " is already existed");
+			throw new SportIsExistingException ("Sport ID : " + sport.getSportID() + " is already existed");
 		 } 
 		sRepo.createSport(sport);
 		return "Sports Created ID : " + sport.getSportID();
@@ -38,7 +42,7 @@ public class SportAthleteCRUDService {
 	public Sport getSportByID(int ID) {
 		Sport check = sRepo.getSportByID(ID);
 		if(check == null) {
-			System.out.print("Sport ID : " + ID + " is not existing");
+			throw new SportNotFoundException("Sport ID : " + ID + " is not existing");
 		}
 		return check;
 	}
@@ -47,7 +51,7 @@ public class SportAthleteCRUDService {
 	public String updateSport(Sport sport) {
 		Sport check = sRepo.getSportByID(sport.getSportID());
 		if(check == null) {
-			  return ("Sport ID " + sport.getSportID() + " does not exist!");
+			  throw new SportNotFoundException ("Sport ID " + sport.getSportID() + " does not exist!");
 		}
 		 sRepo.updateSport(sport);
 		 return "Sport ID : " + check.getSportID() + " Updated";
@@ -58,7 +62,7 @@ public class SportAthleteCRUDService {
 		Sport check = sRepo.getSportByID(ID);
 		
 		if(check == null) {
-			  return ("Sport ID " + ID + " does not exist!");
+			 throw new SportNotFoundException ("Sport ID " + ID + " does not exist!");
 		}	
 		
 		 sRepo.deleteSportByID(ID);
@@ -69,12 +73,12 @@ public class SportAthleteCRUDService {
 	//Athlete CRUD
 	
 	public String createAthlete(Athlete athlete) {
-		Athlete check = aRepo.getAthleteByID(athlete.getSportID());
+		Athlete check = aRepo.getAthleteByID(athlete.getAthleteID());
 		if(check != null) {
-			return ("Athlete ID : " + athlete.getSportID() + " is already existed");
+			throw new AthleteIsExistingException ("Athlete ID : " + athlete.getAthleteID() + " is already existed");
 		}
 		aRepo.createAthlete(athlete);
-		return "Athlete ID : " + athlete.getSportID() + " created";
+		return "Athlete ID : " + athlete.getAthleteID() + " created";
 	}
 	
 	public List<Athlete> getAllAthlete() {
@@ -84,7 +88,7 @@ public class SportAthleteCRUDService {
 	public Athlete getAthleteByID(int ID) {
 		Athlete check = aRepo.getAthleteByID(ID);
 		if(check == null) {
-			System.out.print("Sport ID : " + ID + " is not existing");
+			throw new AthleteNotFoundException("Athlete ID : " + ID + " is not existing");
 		}
 		return check;
 	}
@@ -96,9 +100,5 @@ public class SportAthleteCRUDService {
 	public int deleteAthleteByID(int ID) {
 		return aRepo.deleteAthleteByID(ID);
 	}
-	
-	
-	
-	
 
 }
