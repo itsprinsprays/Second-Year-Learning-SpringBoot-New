@@ -48,8 +48,7 @@ public class CRUDController {
 	@PutMapping("/{ID}")
 	public String updateSport(@PathVariable int ID, @RequestBody Sport sport) {
 		sport.setSportID(ID);
-		sService.updateSport(sport);
-		return "Sport ID " + ID + " Name Updated";
+		return sService.updateSport(sport);
 	}
 	
 	@DeleteMapping("/{ID}")

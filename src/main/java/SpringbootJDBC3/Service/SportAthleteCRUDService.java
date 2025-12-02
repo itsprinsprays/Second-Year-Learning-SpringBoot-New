@@ -44,16 +44,22 @@ public class SportAthleteCRUDService {
 	}
 	
 	
-	public int updateSport(Sport sport) {
-		return sRepo.updateSport(sport);
+	public String updateSport(Sport sport) {
+		Sport check = sRepo.getSportByID(sport.getSportID());
+		if(check == null) {
+			  return ("Sport ID " + sport.getSportID() + " does not exist!");
+		}
+		 sRepo.updateSport(sport);
+		 return "Sport ID : " + check.getSportID() + " Updated";
 	}
 	
 	public String deleteSportByID(int ID) {
 		String name = sRepo.getSportNameByID(ID);
 		Sport check = sRepo.getSportByID(ID);
+		
 		if(check == null) {
-			   System.out.print("Sport ID " + ID + " does not exist!");
-		}
+			  return ("Sport ID " + ID + " does not exist!");
+		}	
 		
 		 sRepo.deleteSportByID(ID);
 		 return "Deleted Sport Name : " + name;
