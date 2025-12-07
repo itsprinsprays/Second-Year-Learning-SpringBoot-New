@@ -1,5 +1,7 @@
 package SpringbootJDBC2.service;
 
+import SpringbootJDBC2.exception.BookIDExistingException;
+import SpringbootJDBC2.exception.BookIDNotFoundException;
 import SpringbootJDBC2.model.Book;
 
 import java.util.List;
@@ -20,6 +22,10 @@ public class BookService {
 	}
 	
 	public String createBook(Book book) {
+		Book check = repo.getBookByID(book.getBookID());
+		if(check != null) {
+			throw new BookIDExistingException("Book ID Found : " + book.getBookID());
+		}
 		repo.createBook(book);
 		return "Book Created";
 	}
@@ -35,7 +41,7 @@ public class BookService {
 	public String updateBook(Book book) {
 		int rows = repo.UpdateBook(book);
 		   if (rows == 0) {
-	            throw new RuntimeException("Book ID not found: " + book.getBookID());
+	            throw new BookIDNotFoundException("Book ID not found: " + book.getBookID());
 	        }
 		return "Book Info Updated";
 	}
@@ -43,7 +49,7 @@ public class BookService {
 	public String partialUpdateBook(Book book) {
 		int rows = repo.partialUpdate(book);
 		if(rows == 0) {
-			throw new RuntimeException("Book ID Not Found : " + book.getBookID());
+			throw new BookIDNotFoundException("Book ID Not Found : " + book.getBookID());
 		}
 		return "Book ID : " + book.getBookID() + " is Updated";
 	}
