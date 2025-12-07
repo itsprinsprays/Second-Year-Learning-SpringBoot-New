@@ -16,23 +16,24 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
 	
+	
 	//Sport  Existing 
 	@ExceptionHandler(SportIsExistingException.class)
 	public ResponseEntity<ErrorResponse> sportExisting(SportIsExistingException e) {
-		ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND.value());
-		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+		ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.CONFLICT.value());
+		return new ResponseEntity<>(error, HttpStatus.CONFLICT);
 	}
 	
 	//Athlete Existing
 	@ExceptionHandler(AthleteIsExistingException.class)
 	public ResponseEntity<ErrorResponse> athleteExisting(AthleteIsExistingException e) {
-		ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND.value());
-		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+		ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.CONFLICT.value());
+		return new ResponseEntity<>(error, HttpStatus.CONFLICT);
 	}
 	
 	//Athlete Not Existing
 	@ExceptionHandler(AthleteNotFoundException.class)
-	public ResponseEntity<ErrorResponse> athleteExisting(AthleteNotFoundException e) {
+	public ResponseEntity<ErrorResponse> athleteNotExisting(AthleteNotFoundException e) {
 		ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND.value());
 		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
