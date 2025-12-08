@@ -31,8 +31,7 @@ public class CustomerController {
 	
 	@PostMapping
 	public String createCustomer(@RequestBody Customer customer) {
-		serv.addCustomer(customer);
-		return "Creating Succesfully";
+		return serv.addCustomer(customer);
 	}
 	
 	@GetMapping

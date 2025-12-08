@@ -35,7 +35,11 @@ public class BookService {
 	}
 	
 	public Book getBookByID(int ID) {
-		return repo.getBookByID(ID);
+		Book check = repo.getBookByID(ID);
+		if(check == null) {
+			throw new BookIDNotFoundException("Book ID not found: " + ID);
+		}
+	 return	repo.getBookByID(ID);
 	}
 	
 	public String updateBook(Book book) {
@@ -55,6 +59,10 @@ public class BookService {
 	}
 	
 	public String deleteBookByID(int ID) {
+		Book check = repo.getBookByID(ID);
+		if(check == null) {
+			throw new BookIDNotFoundException("Book ID not found: " + ID);
+		}
 		repo.DeleteBookByID(ID);
 		return "Book Deleted";
 	}

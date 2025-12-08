@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import SpringbootJDBC1.exception.OrderIDExistingException;
 import SpringbootJDBC1.model.Customer;
 import SpringbootJDBC1.repository.CustomerRepository;
 
@@ -19,8 +20,12 @@ public class CustomerService {
 	}
 	
 	public String addCustomer(Customer customer) {
-		 repo.addCustomer(customer);
-		 return "Succesfully Added";
+		Customer check = repo.getCustomerByID(customer.getOrderNumber());
+		if(check == null) {
+			 repo.addCustomer(customer);
+			 return "Succesfully Added";
+		} 
+			throw new OrderIDExistingException("Customer ID " + customer.getOrderNumber() + " is Existing");
 	}
 	
 	public List<Customer> getAll() {

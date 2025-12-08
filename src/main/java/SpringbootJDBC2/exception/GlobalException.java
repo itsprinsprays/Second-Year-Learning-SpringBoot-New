@@ -15,7 +15,7 @@ public class GlobalException {
 	}
 	
 	@ExceptionHandler(BookIDNotFoundException.class)
-	public ResponseEntity<ErrorResponse> BIDExisting(BookIDNotFoundException e) {
+	public ResponseEntity<ErrorResponse> BIDNotExisting(BookIDNotFoundException e) {
 		ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND.value());
 		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}

@@ -1,0 +1,17 @@
+package SpringbootJDBC1.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+@RestControllerAdvice
+public class GlobalException {
+	
+	@ExceptionHandler(OrderIDExistingException.class)
+	public ResponseEntity<ErrorResponse> CIDExisting(OrderIDExistingException e) {
+		ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.CONFLICT.value());
+		return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+	}
+
+}

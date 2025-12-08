@@ -37,9 +37,11 @@ public class CustomerRepository implements CustomerImp {
 	
 	@Override
 	public Customer getCustomerByID(int id) {
-		String sql = "Select * from customer where SID = ? ";
-		return jdbcTemplate.queryForObject(sql, rowMapper, id);
+	    String sql = "SELECT * FROM customer WHERE OrderNumber = ?";
+	    List<Customer> customers = jdbcTemplate.query(sql, rowMapper, id);
+	    return customers.isEmpty() ? null : customers.get(0);
 	}
+
 	
 	@Override
 	public int updateCustomer(Customer customer) {
