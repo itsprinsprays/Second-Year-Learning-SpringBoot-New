@@ -21,7 +21,7 @@ public class Pupils {
 	@Column(nullable = false)
 	private String section;
 	
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true) 
 	private String email;
 	
 	public Pupils() { }

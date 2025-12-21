@@ -34,8 +34,11 @@ public class PupilService {
 				.orElseThrow(() -> new RuntimeException("Student Not Found"));
 	}
 
-	public String deletePupils(Long ID) {
-		 repo.deleteById(ID);
-		 return ID + " is deleted";
+	public Pupils deletePupils(Long ID) {
+		Pupils pupil = repo.findById(ID)
+						   .orElseThrow(() -> new RuntimeException("Student Not Found"));
+		repo.delete(pupil);
+		return pupil;
 	}
 }
+ 
