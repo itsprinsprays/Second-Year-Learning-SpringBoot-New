@@ -1,0 +1,11 @@
+Relational Database 
+
+@ManyToOne & @JoinColumn
+
+What I learned is that @ManyToOne and @JoinColumn are used to connect a child table to a parent table using the foreign key and primary key. This way, the child table doesn’t need to store all the data from the parent, just the ID. It makes updating easier because if we change a value in the parent table, like a customer’s name, it will automatically show in all linked records. It helps keep the database organized and makes the code cleaner and easier to manage.
+
+We can also use multiple foreign keys in a child table so that it references more than one parent. This way, the values the child holds are more specific and organized, which makes the database easier to maintain and update.
+
+
+
+January 21, 2026
