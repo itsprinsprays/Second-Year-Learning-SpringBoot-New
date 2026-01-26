@@ -30,6 +30,8 @@ public class Employee {
 	@JoinColumn(name = "dept_ID", nullable = false)
 	private Department department;
 	
+	public Employee() {}
+	
 	public Employee(String name, int age, String contactNumber) {
 		this.name = name;
 		this.age = age;
@@ -40,6 +42,7 @@ public class Employee {
 	public String getName() { return name; }
 	public int getAge() { return age; }
 	public String getContactNumber() { return contactNumber; }
+	public int getEID() { return EID; }
 	
 	//Setters
 	public void setName(String name) { this.name = name; }

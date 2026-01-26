@@ -18,6 +18,7 @@ public class EmployeeRequestDTO {
 	@Pattern(regexp = "\\d{11}", message = "Contact Number must be 11 Digits")
 	private String contactNumber;
 	
+	@NotNull
 	private Long deptId;
 	
 	public EmployeeRequestDTO() {}
