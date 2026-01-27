@@ -1,5 +1,6 @@
 package SpringbootJPA1.dto;
 
+import SpringbootJPA1.entity.Department;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,14 +20,18 @@ public class EmployeeRequestDTO {
 	private String contactNumber;
 	
 	@NotNull
-	private Long deptId;
+	private int deptId;
+	
+//	@NotNull
+//	private int department;
 	
 	public EmployeeRequestDTO() {}
 	
 	public String getName() { return name; }
 	public int getAge() { return age; }
 	public String getContactNumber() { return contactNumber; }
-	public Long getDeptID() { return deptId; }
+	public int getDeptID() { return deptId; }
+//	public Department getDepartment() { return department; }
 	
 	
 }
