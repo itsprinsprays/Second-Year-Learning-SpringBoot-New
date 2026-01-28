@@ -5,22 +5,29 @@ public class EmployeeResponseDTO {
 	private String name;
 	private int age;
 	private String contactNumber;
-	private Long deptId;
+	private int deptId;
 	private String statusMessage;
+	private String departmentName;
+
 	
 	public EmployeeResponseDTO() { }
-	
-	public EmployeeResponseDTO(String name, int age, String contactNumber,String statusMessage) {
-		this.name = name;
-		this.age = age;
-		this.contactNumber = contactNumber;
-		this.statusMessage = statusMessage;
-	}
 	
 	public String getName(){ return name; }
 	public int getAge() { return age; }
 	public String getContactNumber() { return contactNumber; }
-	public Long getDeptId() { return deptId; }
+	public int getDeptId() { return deptId; }
     public String getStatusMessage() { return statusMessage;}
+    public String getDepartmentName() { return departmentName;}
+
+    
+    
+    public void setName(String name) { this.name = name; }
+    public void setAge(int age) { this.age = age; }
+    public void setContactNumber(String contactNumber) { this.contactNumber = contactNumber; }
+    public void setDeptId(int deptId) { this.deptId = deptId; }
+    public void setStatusMessage(String statusMessage) { this.statusMessage = statusMessage; }
+    public void setDepartmentName(String departmentName) { this.departmentName = departmentName; }
+
+
 
 }

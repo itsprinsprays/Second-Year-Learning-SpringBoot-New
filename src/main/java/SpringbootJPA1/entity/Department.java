@@ -20,10 +20,7 @@ public class Department {
 	@Column(nullable = false)
 	private String departmentName;
 	
-	public Department(int DID, String departmentName) {
-		this.DID = DID;
-		this.departmentName = departmentName;
-	}
+	public Department() {}
 	
 	public int getDID() {
 		return DID;

@@ -31,14 +31,7 @@ public class Employee {
 	private Department department;
 	
 	public Employee() {}
-	
-	public Employee(String name, int age, String contactNumber, Department department) {
-		this.name = name;
-		this.age = age;
-		this.contactNumber = contactNumber;
-		this.department = department;
-	}
-	
+		
 	//Getters
 	public String getName() { return name; }
 	public int getAge() { return age; }

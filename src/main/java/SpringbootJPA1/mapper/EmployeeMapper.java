@@ -11,21 +11,16 @@ public class EmployeeMapper {
 
     public EmployeeMapper() {}
 
-    public Employee toEntity(EmployeeRequestDTO dto) {
-        	Employee employee = new Employee();
-        	employee.setName(dto.getName());
-        	employee.setAge(dto.getAge());
-        	employee.setContactNumber(dto.getContactNumber());
-        	
-        	return employee;
-    }
 
-    public static EmployeeResponseDTO toResponse(Employee student, String message) {
-        return new EmployeeResponseDTO(
-                student.getName(),
-                student.getAge(),
-                student.getContactNumber(),
-                message
-        );
+    public static EmployeeResponseDTO toResponse(Employee employee, String message) {
+    			EmployeeResponseDTO dto = new EmployeeResponseDTO();
+    			dto.setDeptId(employee.getEID());
+    			dto.setName(employee.getName());
+    			dto.setContactNumber(employee.getContactNumber());
+    			dto.setAge(employee.getAge());
+    			dto.setDepartmentName(employee.getDepartment().getDepartmentName());
+    			dto.setStatusMessage(message);
+    			return dto;
+       
     }
 }

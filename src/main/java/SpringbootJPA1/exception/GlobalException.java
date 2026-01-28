@@ -13,5 +13,11 @@ public class GlobalException {
 		ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.CONFLICT.value());
 		return new ResponseEntity<>(error,HttpStatus.CONFLICT);
 	}
+	
+	@ExceptionHandler(DepartmentNotFoundException.class)
+	public ResponseEntity<ErrorResponse> DeptNotExisting(DepartmentNotFoundException e) {
+		ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND.value());
+		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+	}
 
 }

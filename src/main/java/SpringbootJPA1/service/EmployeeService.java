@@ -1,12 +1,14 @@
 package SpringbootJPA1.service;
 
 import org.springframework.stereotype.Service;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import SpringbootJPA1.dto.EmployeeRequestDTO;
 import SpringbootJPA1.dto.EmployeeResponseDTO;
 import SpringbootJPA1.entity.Employee;
 import SpringbootJPA1.exception.ContactNumberExistingException;
+import SpringbootJPA1.exception.DepartmentNotFoundException;
 import SpringbootJPA1.mapper.EmployeeMapper;
 import SpringbootJPA1.repository.DepartmentRepository;
 import SpringbootJPA1.repository.EmployeeRepository;
@@ -17,12 +19,10 @@ public class EmployeeService {
 	
 	private final EmployeeRepository empRepo;
 	private final DepartmentRepository deptRepo;
-	EmployeeMapper employeeMapper;
 	
-	public EmployeeService(EmployeeRepository empRepo, DepartmentRepository deptRepo, EmployeeMapper employeeMapper) {
+	public EmployeeService(EmployeeRepository empRepo, DepartmentRepository deptRepo) {
 		this.empRepo = empRepo;
 		this.deptRepo = deptRepo;
-		this.employeeMapper = employeeMapper;
 	}
 	
 	@Transactional
@@ -31,9 +31,8 @@ public class EmployeeService {
 			throw new ContactNumberExistingException("Contact Number is the same");
 		}
 		
-		
 			Department dept = deptRepo.findById(dto.getDeptID())
-			    .orElseThrow(() -> new RuntimeException("Department not found"));
+			    .orElseThrow(() -> new DepartmentNotFoundException("Department not found"));
 
 			Employee emp = new Employee();
 			emp.setName(dto.getName());
@@ -41,14 +40,10 @@ public class EmployeeService {
 			emp.setContactNumber(dto.getContactNumber());
 		    emp.setDepartment(dept); // <--- important!
 		    
-			Employee employee = employeeMapper.toEntity(dto);
-			employee.setDepartment(dept);
-			employee = empRepo.save(employee);
-
 			empRepo.save(emp);
 		
-	     return EmployeeMapper.toResponse(employee,"Employee successfully registered!"  );
+			return EmployeeMapper.toResponse(emp, "Added Succesfully");
+	     
 	}
-	
 
 }
