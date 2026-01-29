@@ -14,7 +14,7 @@ public class EmployeeMapper {
 
     public static EmployeeResponseDTO toResponse(Employee employee, String message) {
     			EmployeeResponseDTO dto = new EmployeeResponseDTO();
-    			dto.setDeptId(employee.getEID());
+    			dto.setDeptId(employee.getDepartment().getDID());
     			dto.setName(employee.getName());
     			dto.setContactNumber(employee.getContactNumber());
     			dto.setAge(employee.getAge());

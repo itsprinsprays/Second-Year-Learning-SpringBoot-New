@@ -1,5 +1,8 @@
 package SpringbootJPA1.dto;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({"name","age","contactNumber","deptID","departmentName","statusMessage"})
 public class EmployeeResponseDTO {
 	
 	private String name;

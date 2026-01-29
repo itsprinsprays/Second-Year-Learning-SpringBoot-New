@@ -28,11 +28,11 @@ public class EmployeeService {
 	@Transactional
 	public EmployeeResponseDTO createEmployee(EmployeeRequestDTO dto) {
 		if(empRepo.existsByContactNumber(dto.getContactNumber())) {
-			throw new ContactNumberExistingException("Contact Number is the same");
+			throw new ContactNumberExistingException(dto.getContactNumber() + "Contact Number is existing");
 		}
 		
-			Department dept = deptRepo.findById(dto.getDeptID())
-			    .orElseThrow(() -> new DepartmentNotFoundException("Department not found"));
+			Department dept = deptRepo.findById(dto.getDeptId())
+			    .orElseThrow(() -> new DepartmentNotFoundException(dto.getDeptId() + "Department not found"));
 
 			Employee emp = new Employee();
 			emp.setName(dto.getName());

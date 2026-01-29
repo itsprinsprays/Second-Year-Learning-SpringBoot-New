@@ -25,7 +25,7 @@ public class EmployeeRequestDTO {
 	public String getName() { return name; }
 	public int getAge() { return age; }
 	public String getContactNumber() { return contactNumber; }
-	public int getDeptID() { return deptId; }
+	public int getDeptId() { return deptId; }
 	
 	
 }

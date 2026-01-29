@@ -13,8 +13,6 @@ import jakarta.persistence.TableGenerator;
 public class Department {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "dept")
-	@TableGenerator(name = "dept", initialValue = 100, allocationSize = 1)
 	private int DID;
 	
 	@Column(nullable = false)
