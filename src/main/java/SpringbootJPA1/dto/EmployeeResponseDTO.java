@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({"name","age","contactNumber","deptID","departmentName","statusMessage"})
 public class EmployeeResponseDTO {
 	
+	private int EID;
 	private String name;
 	private int age;
 	private String contactNumber;
@@ -15,6 +16,7 @@ public class EmployeeResponseDTO {
 	
 	public EmployeeResponseDTO() { }
 	
+	public int getEID() { return EID; }
 	public String getName(){ return name; }
 	public int getAge() { return age; }
 	public String getContactNumber() { return contactNumber; }
@@ -22,8 +24,7 @@ public class EmployeeResponseDTO {
     public String getStatusMessage() { return statusMessage;}
     public String getDepartmentName() { return departmentName;}
 
-    
-    
+    public void setEID(int EID) { this.EID = EID; }
     public void setName(String name) { this.name = name; }
     public void setAge(int age) { this.age = age; }
     public void setContactNumber(String contactNumber) { this.contactNumber = contactNumber; }

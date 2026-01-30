@@ -1,5 +1,7 @@
 package SpringbootJPA1.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -28,11 +30,11 @@ public class EmployeeService {
 	@Transactional
 	public EmployeeResponseDTO createEmployee(EmployeeRequestDTO dto) {
 		if(empRepo.existsByContactNumber(dto.getContactNumber())) {
-			throw new ContactNumberExistingException(dto.getContactNumber() + "Contact Number is existing");
+			throw new ContactNumberExistingException(dto.getContactNumber() + " Contact Number is existing");
 		}
 		
 			Department dept = deptRepo.findById(dto.getDeptId())
-			    .orElseThrow(() -> new DepartmentNotFoundException(dto.getDeptId() + "Department not found"));
+			    .orElseThrow(() -> new DepartmentNotFoundException(dto.getDeptId() + " Department not found"));
 
 			Employee emp = new Employee();
 			emp.setName(dto.getName());
@@ -44,6 +46,14 @@ public class EmployeeService {
 		
 			return EmployeeMapper.toResponse(emp, "Added Succesfully");
 	     
+	}
+	
+	public EmployeeResponseDTO getAllEmployee() {
+			List<Employee> employee = empRepo.findAll();
+			
+			return EmployeeMapper.toResponse(employee, null);
+		
+			
 	}
 
 }
