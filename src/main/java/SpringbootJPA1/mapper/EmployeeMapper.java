@@ -29,8 +29,23 @@ public class EmployeeMapper {
     			return dto;
     }
     
-    public static List<EmployeeResponseDTO> allEmployeeResponse(Employee employee, String message) {
-    		List<EmployeeResponseDTO> dto = new ArrayList<>();
-    		dto.setName("");
+    public static List<EmployeeResponseDTO> allEmployeeResponse(List<Employee> employee) {
+    	
+    		List<EmployeeResponseDTO> dtoList = new ArrayList<>();
+    		
+    		for(Employee employ : employee) {
+    		
+    		EmployeeResponseDTO dto = new EmployeeResponseDTO();
+    		dto.setEID(employ.getEID());
+    		dto.setDeptId(employ.getDepartment().getDID());
+    		dto.setName(employ.getName());
+			dto.setContactNumber(employ.getContactNumber());
+			dto.setAge(employ.getAge());
+			dto.setDepartmentName(employ.getDepartment().getDepartmentName());
+
+			
+			dtoList.add(dto);
+         }
+			return dtoList;
     }
 }

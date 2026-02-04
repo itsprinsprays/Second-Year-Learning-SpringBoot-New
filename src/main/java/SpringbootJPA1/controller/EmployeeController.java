@@ -1,8 +1,11 @@
 package SpringbootJPA1.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +30,13 @@ public class EmployeeController {
 	@PostMapping
 	public ResponseEntity<EmployeeResponseDTO> createEmployee(@Valid @RequestBody EmployeeRequestDTO req) {
 		  EmployeeResponseDTO response = serv.createEmployee(req);
-	        return ResponseEntity.status(HttpStatus.CREATED).body(response);	}
-
+	        return ResponseEntity.status(HttpStatus.CREATED).body(response);	
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<EmployeeResponseDTO>> getAllEmployee() {
+		 return ResponseEntity.ok(serv.getAllEmployee());
+	}
 }
+
+

@@ -48,11 +48,10 @@ public class EmployeeService {
 	     
 	}
 	
-	public EmployeeResponseDTO getAllEmployee() {
+	public List<EmployeeResponseDTO> getAllEmployee() {
 			List<Employee> employee = empRepo.findAll();
 			
-			return EmployeeMapper.toResponse(employee, null);
-		
+			return EmployeeMapper.allEmployeeResponse(employee);
 			
 	}
 
