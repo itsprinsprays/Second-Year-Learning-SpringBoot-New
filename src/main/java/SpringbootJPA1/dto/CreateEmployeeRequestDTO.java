@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-public class EmployeeRequestDTO {
+public class CreateEmployeeRequestDTO {
 	
 	@NotBlank(message = "Name must not be Blank")
 	private String name;
@@ -20,7 +20,7 @@ public class EmployeeRequestDTO {
 	@NotNull
 	private int deptId;
 	
-	public EmployeeRequestDTO() {}
+	public CreateEmployeeRequestDTO() {}
 	
 	public String getName() { return name; }
 	public int getAge() { return age; }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import SpringbootJPA1.dto.EmployeeRequestDTO;
+import SpringbootJPA1.dto.CreateEmployeeRequestDTO;
 import SpringbootJPA1.dto.EmployeeResponseDTO;
 import SpringbootJPA1.service.EmployeeService;
 import jakarta.validation.Valid;
@@ -28,7 +28,7 @@ public class EmployeeController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<EmployeeResponseDTO> createEmployee(@Valid @RequestBody EmployeeRequestDTO req) {
+	public ResponseEntity<EmployeeResponseDTO> createEmployee(@Valid @RequestBody CreateEmployeeRequestDTO req) {
 		  EmployeeResponseDTO response = serv.createEmployee(req);
 	        return ResponseEntity.status(HttpStatus.CREATED).body(response);	
 	}

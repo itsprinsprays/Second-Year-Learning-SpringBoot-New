@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import SpringbootJPA1.dto.EmployeeRequestDTO;
+import SpringbootJPA1.dto.CreateEmployeeRequestDTO;
 import SpringbootJPA1.dto.EmployeeResponseDTO;
 import SpringbootJPA1.entity.Employee;
 
@@ -17,15 +17,15 @@ public class EmployeeMapper {
     public EmployeeMapper() {}
 
 
-    public static EmployeeResponseDTO toResponse(Employee employee) {
+    public static EmployeeResponseDTO toResponse(Employee employee, String message) {
     			EmployeeResponseDTO dto = new EmployeeResponseDTO();
-      			dto.setStatusMessage("Added Succesfully");
     			dto.setEID(employee.getEID());
     			dto.setDeptId(employee.getDepartment().getDID());
     			dto.setName(employee.getName());
     			dto.setContactNumber(employee.getContactNumber());
     			dto.setAge(employee.getAge());
     			dto.setDepartmentName(employee.getDepartment().getDepartmentName());
+    			dto.setStatusMessage("Added Succesfully");
     			return dto;
     }
     
@@ -51,10 +51,16 @@ public class EmployeeMapper {
 //    }
     
     public static List<EmployeeResponseDTO> getAllEmployee(List<Employee> employee) {
-    		
-    			return employee.stream()
-    					.map(EmployeeMapper::toResponse)
+    	    			return employee.stream()
+    					.map(emp -> EmployeeMapper.toResponse(emp, "all employee"))
     					.toList();
+    }
+    
+    public static EmployeeResponseDTO deleteEmployee(Employee employee) {
+    			EmployeeResponseDTO dto = new EmployeeResponseDTO();
+    			dto.setStatusMessage(dto.getEID() + " is deleted");
+    			return dto;
+    	
     }
     
     

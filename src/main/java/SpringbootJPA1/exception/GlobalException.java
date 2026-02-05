@@ -19,5 +19,11 @@ public class GlobalException {
 		ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND.value());
 		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(IDNotExistingException.class)
+	public ResponseEntity<ErrorResponse> idNotExisting(IDNotExistingException e) {
+		ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND.value());
+		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+	}
 
 }
