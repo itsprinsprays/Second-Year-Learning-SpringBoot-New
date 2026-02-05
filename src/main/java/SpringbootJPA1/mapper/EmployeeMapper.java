@@ -17,35 +17,45 @@ public class EmployeeMapper {
     public EmployeeMapper() {}
 
 
-    public static EmployeeResponseDTO toResponse(Employee employee, String message) {
+    public static EmployeeResponseDTO toResponse(Employee employee) {
     			EmployeeResponseDTO dto = new EmployeeResponseDTO();
+      			dto.setStatusMessage("Added Succesfully");
     			dto.setEID(employee.getEID());
     			dto.setDeptId(employee.getDepartment().getDID());
     			dto.setName(employee.getName());
     			dto.setContactNumber(employee.getContactNumber());
     			dto.setAge(employee.getAge());
     			dto.setDepartmentName(employee.getDepartment().getDepartmentName());
-    			dto.setStatusMessage(message);
     			return dto;
     }
     
-    public static List<EmployeeResponseDTO> allEmployeeResponse(List<Employee> employee) {
-    	
-    		List<EmployeeResponseDTO> dtoList = new ArrayList<>();
+    
+//    public static List<EmployeeResponseDTO> allEmployeeResponse(List<Employee> employee) {
+//    	
+//    		List<EmployeeResponseDTO> dtoList = new ArrayList<>();
+//    		
+//    		for(Employee employ : employee) {
+//    		
+//    		EmployeeResponseDTO dto = new EmployeeResponseDTO();
+//    		dto.setEID(employ.getEID());
+//    		dto.setDeptId(employ.getDepartment().getDID());
+//    		dto.setName(employ.getName());
+//			dto.setContactNumber(employ.getContactNumber());
+//			dto.setAge(employ.getAge());
+//			dto.setDepartmentName(employ.getDepartment().getDepartmentName());
+//
+//			
+//			dtoList.add(dto);
+//         }
+//			return dtoList;
+//    }
+    
+    public static List<EmployeeResponseDTO> getAllEmployee(List<Employee> employee) {
     		
-    		for(Employee employ : employee) {
-    		
-    		EmployeeResponseDTO dto = new EmployeeResponseDTO();
-    		dto.setEID(employ.getEID());
-    		dto.setDeptId(employ.getDepartment().getDID());
-    		dto.setName(employ.getName());
-			dto.setContactNumber(employ.getContactNumber());
-			dto.setAge(employ.getAge());
-			dto.setDepartmentName(employ.getDepartment().getDepartmentName());
-
-			
-			dtoList.add(dto);
-         }
-			return dtoList;
+    			return employee.stream()
+    					.map(EmployeeMapper::toResponse)
+    					.toList();
     }
+    
+    
 }

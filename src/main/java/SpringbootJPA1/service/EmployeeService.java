@@ -44,14 +44,14 @@ public class EmployeeService {
 		    
 			empRepo.save(emp);
 		
-			return EmployeeMapper.toResponse(emp, "Added Succesfully");
+			return EmployeeMapper.toResponse(emp);
 	     
 	}
 	
 	public List<EmployeeResponseDTO> getAllEmployee() {
 			List<Employee> employee = empRepo.findAll();
 			
-			return EmployeeMapper.allEmployeeResponse(employee);
+			return EmployeeMapper.getAllEmployee(employee);
 			
 	}
 
