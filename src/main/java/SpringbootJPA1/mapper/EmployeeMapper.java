@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import SpringbootJPA1.dto.CreateEmployeeRequestDTO;
+import SpringbootJPA1.dto.DeleteEmployeeResponseDTO;
 import SpringbootJPA1.dto.EmployeeResponseDTO;
 import SpringbootJPA1.entity.Employee;
 
@@ -15,7 +16,6 @@ import SpringbootJPA1.entity.Employee;
 public class EmployeeMapper {
 
     public EmployeeMapper() {}
-
 
     public static EmployeeResponseDTO toResponse(Employee employee, String message) {
     			EmployeeResponseDTO dto = new EmployeeResponseDTO();
@@ -56,12 +56,12 @@ public class EmployeeMapper {
     					.toList();
     }
     
-    public static EmployeeResponseDTO deleteEmployee(Employee employee) {
-    			EmployeeResponseDTO dto = new EmployeeResponseDTO();
-    			dto.setStatusMessage(dto.getEID() + " is deleted");
-    			return dto;
-    	
-    }
-    
+    public static DeleteEmployeeResponseDTO convertToDTO(Employee employee) {
+    	DeleteEmployeeResponseDTO dto = new DeleteEmployeeResponseDTO();
+    	dto.setName(employee.getName());
+    	dto.setEID(employee.getEID());
+    	dto.setStatusMessage(employee.getEID() + " is deleted");
+    	return dto;
+    }  
     
 }

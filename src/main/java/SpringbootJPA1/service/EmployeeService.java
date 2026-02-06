@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import SpringbootJPA1.dto.CreateEmployeeRequestDTO;
+import SpringbootJPA1.dto.DeleteEmployeeResponseDTO;
 import SpringbootJPA1.dto.EmployeeResponseDTO;
 import SpringbootJPA1.entity.Employee;
 import SpringbootJPA1.exception.ContactNumberExistingException;
@@ -57,15 +58,15 @@ public class EmployeeService {
 	}
 	
 	@Transactional //used for procedural or step by step process. Will negate if the process is not finish
-	public EmployeeResponseDTO deleteEmployee(int id) { //If the needed field is 1 only then @PathVariable is enought, hence 
+	public DeleteEmployeeResponseDTO deleteEmployee(int id) { //If the needed field is 1 only then @PathVariable is enought, hence z	
 	    Employee employee = empRepo.findById(id)		//requestDTO is not needed since it used for multiple field attributes.
 	        .orElseThrow(() -> new IDNotExistingException(id + " not found"));
 	    
-	    EmployeeMapper.deleteEmployee(employee);
+//	    EmployeeMapper.deleteEmployee(employee);
 
 	    empRepo.delete(employee);
 
-	    return EmployeeMapper.deleteEmployee(employee);
+	    return EmployeeMapper.convertToDTO(employee);
 	}
 
 }

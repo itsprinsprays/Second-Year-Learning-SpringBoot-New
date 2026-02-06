@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import SpringbootJPA1.dto.CreateEmployeeRequestDTO;
+import SpringbootJPA1.dto.DeleteEmployeeResponseDTO;
 import SpringbootJPA1.dto.EmployeeResponseDTO;
 import SpringbootJPA1.service.EmployeeService;
 import jakarta.validation.Valid;
@@ -41,8 +41,8 @@ public class EmployeeController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<EmployeeResponseDTO> deleteEmployee(@PathVariable int id) {
-		EmployeeResponseDTO response = serv.deleteEmployee(id);
+	public ResponseEntity<DeleteEmployeeResponseDTO> deleteEmployee(@PathVariable int id) {
+		DeleteEmployeeResponseDTO response = serv.deleteEmployee(id);
 		return ResponseEntity.ok(response); 
 	}
 }

@@ -31,6 +31,7 @@ public class Employee {
 	private Department department;
 	
 	public Employee() {}
+	
 		
 	//Getters
 	public String getName() { return name; }

@@ -1,8 +1,6 @@
 package SpringbootJPA1.dto;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({"name","age","contactNumber","deptID","departmentName","statusMessage"})
 public class EmployeeResponseDTO {
 	
 	private int EID;
@@ -12,8 +10,8 @@ public class EmployeeResponseDTO {
 	private int deptId;
 	private String statusMessage;
 	private String departmentName;
-
 	
+
 	public EmployeeResponseDTO() { }
 	
 	public int getEID() { return EID; }
