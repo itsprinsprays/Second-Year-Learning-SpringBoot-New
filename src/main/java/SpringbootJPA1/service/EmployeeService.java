@@ -7,8 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import SpringbootJPA1.dto.CreateEmployeeRequestDTO;
-import SpringbootJPA1.dto.DeleteEmployeeResponseDTO;
+import SpringbootJPA1.dto.DeleteEmployeeResponseDTO ;
 import SpringbootJPA1.dto.EmployeeResponseDTO;
+import SpringbootJPA1.dto.UpdateEmployeeRequestDTO;
 import SpringbootJPA1.entity.Employee;
 import SpringbootJPA1.exception.ContactNumberExistingException;
 import SpringbootJPA1.exception.DepartmentNotFoundException;
@@ -29,6 +30,7 @@ public class EmployeeService {
 		this.deptRepo = deptRepo;
 	}
 	
+	//Creating an employee
 	@Transactional
 	public EmployeeResponseDTO createEmployee(CreateEmployeeRequestDTO dto) {
 		if(empRepo.existsByContactNumber(dto.getContactNumber())) {
@@ -50,6 +52,7 @@ public class EmployeeService {
 	     
 	}
 	
+	//Getting all the employee
 	public List<EmployeeResponseDTO> getAllEmployee() {
 			List<Employee> employee = empRepo.findAll();
 			
@@ -57,16 +60,40 @@ public class EmployeeService {
 			
 	}
 	
+	@Transactional
+	public EmployeeResponseDTO UpdateEmployee(UpdateEmployeeRequestDTO dto, int id) {
+		Employee employee = empRepo.findById(id).
+				orElseThrow(() -> new IDNotExistingException(id + " not found"));
+		
+		if(dto.getName() != null) {
+			employee.setName(dto.getName());
+		}
+	
+		if(dto.getAge() >= 18) {
+			employee.setAge(dto.getAge());
+		}
+		
+		if(dto.getContactNumber() != null) {
+			employee.setContactNumber(dto.getContactNumber());
+		}
+		
+		empRepo.save(employee);
+		
+		return EmployeeMapper.updateResponse(employee);
+		
+		
+	}
+	
+	
+	//deleting an employee using their id
 	@Transactional //used for procedural or step by step process. Will negate if the process is not finish
 	public DeleteEmployeeResponseDTO deleteEmployee(int id) { //If the needed field is 1 only then @PathVariable is enought, hence z	
 	    Employee employee = empRepo.findById(id)		//requestDTO is not needed since it used for multiple field attributes.
 	        .orElseThrow(() -> new IDNotExistingException(id + " not found"));
-	    
-//	    EmployeeMapper.deleteEmployee(employee);
 
 	    empRepo.delete(employee);
 
-	    return EmployeeMapper.convertToDTO(employee);
+	    return EmployeeMapper.deleteResponse(employee);
 	}
 
 }

@@ -56,7 +56,18 @@ public class EmployeeMapper {
     					.toList();
     }
     
-    public static DeleteEmployeeResponseDTO convertToDTO(Employee employee) {
+    
+    public static EmployeeResponseDTO updateResponse(Employee employee) {
+    	EmployeeResponseDTO dto = new EmployeeResponseDTO();
+    	
+    	dto.setName(employee.getName());
+    	dto.setAge(employee.getAge());
+    	dto.setContactNumber(employee.getContactNumber());
+    	dto.setStatusMessage("Update Succesfully");
+    	return dto;
+    }
+    
+    public static DeleteEmployeeResponseDTO deleteResponse(Employee employee) {
     	DeleteEmployeeResponseDTO dto = new DeleteEmployeeResponseDTO();
     	dto.setName(employee.getName());
     	dto.setEID(employee.getEID());

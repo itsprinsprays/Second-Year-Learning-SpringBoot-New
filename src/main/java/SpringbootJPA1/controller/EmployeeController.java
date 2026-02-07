@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import SpringbootJPA1.dto.CreateEmployeeRequestDTO;
 import SpringbootJPA1.dto.DeleteEmployeeResponseDTO;
 import SpringbootJPA1.dto.EmployeeResponseDTO;
+import SpringbootJPA1.dto.UpdateEmployeeRequestDTO;
 import SpringbootJPA1.service.EmployeeService;
 import jakarta.validation.Valid;
 
@@ -38,6 +40,12 @@ public class EmployeeController {
 	@GetMapping
 	public ResponseEntity<List<EmployeeResponseDTO>> getAllEmployee() {
 		 return ResponseEntity.ok(serv.getAllEmployee()); //will return that something is succesfully operate
+	}
+	
+	@PatchMapping("/{id}")
+	public ResponseEntity<EmployeeResponseDTO> updateEmployee(@Valid @RequestBody UpdateEmployeeRequestDTO req, @PathVariable int id) {
+		EmployeeResponseDTO response = serv.UpdateEmployee(req, id);
+		return ResponseEntity.ok(response);
 	}
 	
 	@DeleteMapping("/{id}")
