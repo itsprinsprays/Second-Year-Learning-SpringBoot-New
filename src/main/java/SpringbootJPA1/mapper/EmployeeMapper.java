@@ -60,9 +60,12 @@ public class EmployeeMapper {
     public static EmployeeResponseDTO updateResponse(Employee employee) {
     	EmployeeResponseDTO dto = new EmployeeResponseDTO();
     	
+    	dto.setEID(employee.getEID());
     	dto.setName(employee.getName());
     	dto.setAge(employee.getAge());
     	dto.setContactNumber(employee.getContactNumber());
+    	dto.setDeptId(employee.getDepartment().getDID());
+    	dto.setDepartmentName(employee.getDepartment().getDepartmentName());
     	dto.setStatusMessage("Update Succesfully");
     	return dto;
     }
