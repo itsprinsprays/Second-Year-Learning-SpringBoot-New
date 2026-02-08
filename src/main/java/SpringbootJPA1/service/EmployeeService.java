@@ -12,8 +12,8 @@ import SpringbootJPA1.dto.EmployeeResponseDTO;
 import SpringbootJPA1.dto.UpdateEmployeeRequestDTO;
 import SpringbootJPA1.entity.Employee;
 import SpringbootJPA1.exception.ContactNumberExistingException;
-import SpringbootJPA1.exception.DepartmentNotFoundException;
-import SpringbootJPA1.exception.IDNotExistingException;
+import SpringbootJPA1.exception.DepartmentIDNotFoundException;
+import SpringbootJPA1.exception.EmployeeIDNotExistingException;
 import SpringbootJPA1.mapper.EmployeeMapper;
 import SpringbootJPA1.repository.DepartmentRepository;
 import SpringbootJPA1.repository.EmployeeRepository;
@@ -38,7 +38,7 @@ public class EmployeeService {
 		}
 		
 			Department dept = deptRepo.findById(dto.getDeptId())
-			    .orElseThrow(() -> new DepartmentNotFoundException(dto.getDeptId() + " Department not found"));
+			    .orElseThrow(() -> new DepartmentIDNotFoundException(dto.getDeptId() + " Department not found"));
 
 			Employee emp = new Employee();
 			emp.setName(dto.getName());
@@ -60,10 +60,11 @@ public class EmployeeService {
 			
 	}
 	
+	//Updating the data of an employee using their id
 	@Transactional
 	public EmployeeResponseDTO UpdateEmployee(UpdateEmployeeRequestDTO dto, int id) {
 		Employee employee = empRepo.findById(id).
-				orElseThrow(() -> new IDNotExistingException(id + " not found"));
+				orElseThrow(() -> new EmployeeIDNotExistingException(id + " not found"));
 		
 		if(dto.getName() != null) {
 			employee.setName(dto.getName());
@@ -89,7 +90,7 @@ public class EmployeeService {
 	@Transactional //used for procedural or step by step process. Will negate if the process is not finish
 	public DeleteEmployeeResponseDTO deleteEmployee(int id) { //If the needed field is 1 only then @PathVariable is enought, hence z	
 	    Employee employee = empRepo.findById(id)		//requestDTO is not needed since it used for multiple field attributes.
-	        .orElseThrow(() -> new IDNotExistingException(id + " not found"));
+	        .orElseThrow(() -> new EmployeeIDNotExistingException(id + " not found"));
 
 	    empRepo.delete(employee);
 

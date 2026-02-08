@@ -13,23 +13,23 @@ import jakarta.persistence.TableGenerator;
 public class Department {
 	
 	@Id
-	private int DID;
+	private int departmentID;
 	
 	@Column(nullable = false)
 	private String departmentName;
 	
 	public Department() {}
 	
-	public int getDID() {
-		return DID;
+	public int getDepartmentID() {
+		return departmentID;
 	}
 	
 	public String getDepartmentName() {
 		return departmentName;
 	}
 	
-	public void setDID(int DID) {
-		this.DID = DID;
+	public void setDepartmentID(int departmentID) {
+		this.departmentID = departmentID;
 	}
 	
 	public void setDepartmentName(String departmentName) {

@@ -1,13 +1,10 @@
 package SpringbootJPA1.dto;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Null;
-import jakarta.validation.constraints.Size;
 
 public class UpdateEmployeeRequestDTO {
 	
-//	@Null(message = "Updating without name?")                                        //in using partial update dont use annotation since
-	String name;																	//the function of partial is for optional
+//	@Null(message = "Updating without name?")                                     //in using partial update dont use annotation since
+	String name;														          //the function of partial is for optional
 //	
 //	@Null(message = "Updating without age?")
 //	@Min(value = 18, message = "Age must be 18 and above")

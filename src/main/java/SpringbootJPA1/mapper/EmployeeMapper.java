@@ -2,12 +2,10 @@ package SpringbootJPA1.mapper;
 
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import SpringbootJPA1.dto.CreateEmployeeRequestDTO;
 import SpringbootJPA1.dto.DeleteEmployeeResponseDTO;
 import SpringbootJPA1.dto.EmployeeResponseDTO;
 import SpringbootJPA1.entity.Employee;
@@ -20,7 +18,7 @@ public class EmployeeMapper {
     public static EmployeeResponseDTO toResponse(Employee employee, String message) {
     			EmployeeResponseDTO dto = new EmployeeResponseDTO();
     			dto.setEID(employee.getEID());
-    			dto.setDeptId(employee.getDepartment().getDID());
+    			dto.setDeptId(employee.getDepartment().getDepartmentID());
     			dto.setName(employee.getName());
     			dto.setContactNumber(employee.getContactNumber());
     			dto.setAge(employee.getAge());
@@ -64,7 +62,7 @@ public class EmployeeMapper {
     	dto.setName(employee.getName());
     	dto.setAge(employee.getAge());
     	dto.setContactNumber(employee.getContactNumber());
-    	dto.setDeptId(employee.getDepartment().getDID());
+    	dto.setDeptId(employee.getDepartment().getDepartmentID());
     	dto.setDepartmentName(employee.getDepartment().getDepartmentName());
     	dto.setStatusMessage("Update Succesfully");
     	return dto;
