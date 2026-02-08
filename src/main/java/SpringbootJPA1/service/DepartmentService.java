@@ -1,12 +1,16 @@
 package SpringbootJPA1.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import SpringbootJPA1.dto.CreateDepartmentRequestDTO;
 import SpringbootJPA1.dto.DepartmentResponseDTO;
 import SpringbootJPA1.entity.Department;
 import SpringbootJPA1.exception.DepartmentIDExistingException;
+import SpringbootJPA1.exception.DepartmentIDNotFoundException;
 import SpringbootJPA1.mapper.DepartmentMapper;
+import SpringbootJPA1.mapper.EmployeeMapper;
 import SpringbootJPA1.repository.DepartmentRepository;
 import jakarta.transaction.Transactional;
 
@@ -32,6 +36,20 @@ public class DepartmentService {
 		
 		return DepartmentMapper.createResponse(department);
 
+	}
+	
+	public List<DepartmentResponseDTO> getAllDepartment() {
+		List<Department> dep = deptRepo.findAll();
+		return DepartmentMapper.getAllResponse(dep);
+	}
+	
+	public DepartmentResponseDTO deleteDepartment(int id) {
+		Department department = deptRepo.findById(id)
+				.orElseThrow(() -> new DepartmentIDNotFoundException(id + " is not existing"));
+		
+		deptRepo.deleteById(id);
+		
+		return DepartmentMapper.deleteResponse(department);
 	}
 	
 }
