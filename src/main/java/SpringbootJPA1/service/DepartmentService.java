@@ -25,7 +25,8 @@ public class DepartmentService {
 	@Transactional
 	public DepartmentResponseDTO createDepartment(CreateDepartmentRequestDTO dto) {
 		if(deptRepo.existsById(dto.getDepartmentID()))
-			throw new DuplicateResourceException("ID Department '" + dto.getDepartmentID() + "' is already existing");
+			throw new DuplicateResourceException
+			("ID Department '" + dto.getDepartmentID() + "' is already existing");
 		
 		Department department = new Department();
 		department.setDepartmentID(dto.getDepartmentID());
@@ -42,9 +43,25 @@ public class DepartmentService {
 		return DepartmentMapper.getAllResponse(dep);
 	}
 	
+	public DepartmentResponseDTO updateDepartment(CreateDepartmentRequestDTO dto) { // I used CreateDTO since they 
+																					//the same field, will improve soon
+		Department department = deptRepo.findById(dto.getDepartmentID())
+		.orElseThrow(() -> new ResourceNotFoundException
+				("ID Department '" + dto.getDepartmentID() + "' is not existing"));
+		
+		if(dto.getDepartmentName() != null)
+		department.setDepartmentName(dto.getDepartmentName());
+		
+		deptRepo.save(department);
+		
+		return DepartmentMapper.createResponse(department);
+			
+	}
+	
 	public DepartmentResponseDTO deleteDepartment(int id) {
 		Department department = deptRepo.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("ID Department '" + id + "' is not existing"));
+				.orElseThrow(() -> new ResourceNotFoundException
+						("ID Department '" + id + "' is not existing"));
 		
 		deptRepo.deleteById(id);
 		
