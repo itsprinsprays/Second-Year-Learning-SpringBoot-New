@@ -8,33 +8,26 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalException {
 	
-	//EMPLOYEE EXCEPTIONS
+	//Exception for the resource that is not found or null
+
 	
-	@ExceptionHandler(ContactNumberExistingException.class)
-	public ResponseEntity<ErrorResponse> IDExistingException(ContactNumberExistingException e) {
-		ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.CONFLICT.value());
-		return new ResponseEntity<>(error,HttpStatus.CONFLICT);
-	}
-	
-	@ExceptionHandler(EmployeeIDNotExistingException.class)
-	public ResponseEntity<ErrorResponse> empdIDNotExisting(EmployeeIDNotExistingException e) {
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<ErrorResponse> notExistingException(ResourceNotFoundException e) {
 		ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND.value());
 		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
 	
 	
-	//DEPARTMENT EXCEPTIONS 
 	
-	@ExceptionHandler(DepartmentIDNotFoundException.class)
-	public ResponseEntity<ErrorResponse> DeptNotExisting(DepartmentIDNotFoundException e) {
-		ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND.value());
-		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-	}
+	//Exception for duplicate resource
 	
-	@ExceptionHandler(DepartmentIDExistingException.class)
-	public ResponseEntity<ErrorResponse> deptExistingException(DepartmentIDExistingException e) {
+	@ExceptionHandler(DuplicateResourceException.class)
+	public ResponseEntity<ErrorResponse> duplicateException(DuplicateResourceException e) {
 		ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.CONFLICT.value());
 		return new ResponseEntity<>(error, HttpStatus.CONFLICT);
 	}
+	
+	
+
 
 }
