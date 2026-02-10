@@ -17,7 +17,13 @@ import SpringbootJPA1.dto.CreateEmployeeRequestDTO;
 import SpringbootJPA1.dto.DeleteEmployeeResponseDTO;
 import SpringbootJPA1.dto.EmployeeResponseDTO;
 import SpringbootJPA1.dto.UpdateEmployeeRequestDTO;
+import SpringbootJPA1.exception.ErrorResponse;
 import SpringbootJPA1.service.EmployeeService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 
 @RestController
@@ -32,6 +38,25 @@ public class EmployeeController {
 	}
 	
 	@PostMapping
+	@Operation(summary = "Create a new employee")
+	@ApiResponses(value = {
+			@ApiResponse(
+				    responseCode = "201",
+				    description = "Employee created successfully",
+				    content = @Content(
+				        mediaType = "application/json",
+				        schema = @Schema(implementation = EmployeeResponseDTO.class)
+				    )
+				),
+			@ApiResponse(
+				    responseCode = "409",
+				    description = "ContactNumber is Existing",
+				    content = @Content(
+				        mediaType = "application/json",
+				        schema = @Schema(implementation = ErrorResponse.class,
+				        		   example = "{\"message\":\"ContactNumber already exists\",\"status\":409,\"timeStamps\":\"2026-02-09T21:15:00\"}")
+				    ))
+	})
 	public ResponseEntity<EmployeeResponseDTO> createEmployee(@Valid @RequestBody CreateEmployeeRequestDTO req) {
 		  EmployeeResponseDTO response = serv.createEmployee(req);
 	        return ResponseEntity.status(HttpStatus.CREATED).body(response);	 //.status for signals that theres new creation
