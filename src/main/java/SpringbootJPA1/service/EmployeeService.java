@@ -65,6 +65,9 @@ public class EmployeeService {
 		Employee employee = empRepo.findById(id).
 				orElseThrow(() -> new ResourceNotFoundException("ID Employee '" + id + "' not found"));
 		
+		if(empRepo.existsByContactNumber(dto.getContactNumber())) 
+			throw new DuplicateResourceException("Contact Number '" + dto.getContactNumber() + "' is existing");
+		
 		if(dto.getName() != null) {
 			employee.setName(dto.getName());
 		}

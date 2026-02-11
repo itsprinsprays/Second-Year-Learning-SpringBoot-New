@@ -43,6 +43,7 @@ public class DepartmentService {
 		return DepartmentMapper.getAllResponse(dep);
 	}
 	
+	@Transactional
 	public DepartmentResponseDTO updateDepartment(CreateDepartmentRequestDTO dto) { // I used CreateDTO since they 
 																					//the same field, will improve soon
 		Department department = deptRepo.findById(dto.getDepartmentID())
@@ -58,6 +59,7 @@ public class DepartmentService {
 			
 	}
 	
+	@Transactional
 	public DepartmentResponseDTO deleteDepartment(int id) {
 		Department department = deptRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException

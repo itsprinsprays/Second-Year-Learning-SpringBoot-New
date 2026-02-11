@@ -53,9 +53,10 @@ public class EmployeeController {
 				    description = "ContactNumber is Existing",
 				    content = @Content(
 				        mediaType = "application/json",
-				        schema = @Schema(implementation = ErrorResponse.class,
-				        		   example = "{\"message\":\"ContactNumber already exists\",\"status\":409,\"timeStamps\":\"2026-02-09T21:15:00\"}")
-				    ))
+				        schema = @Schema(implementation = ErrorResponse.class)
+				        )
+				    )
+				    
 	})
 	public ResponseEntity<EmployeeResponseDTO> createEmployee(@Valid @RequestBody CreateEmployeeRequestDTO req) {
 		  EmployeeResponseDTO response = serv.createEmployee(req);
