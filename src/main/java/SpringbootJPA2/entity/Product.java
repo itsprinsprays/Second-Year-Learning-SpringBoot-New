@@ -1,5 +1,7 @@
 package SpringbootJPA2.entity;
 
+import java.time.LocalDateTime;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
@@ -21,7 +23,7 @@ public class Product {
 	private Long department_Id;
 	
 	@CreationTimestamp
-	private int created_At;
+	private LocalDateTime created_At;
 	
 	@Column(nullable = false)
 	private String productName;
@@ -43,7 +45,7 @@ public class Product {
 	public Product() { }
 	
 	public Long getDepartment_Id() { return department_Id; }
-	public int getCreated_At() { return created_At; }
+	public LocalDateTime getCreated_At() { return created_At; }
 	public String getProductName() { return productName; }
 	public String getDescription() { return description; }
 	public int getStockQuantity() { return stockQuantity; }
@@ -51,7 +53,7 @@ public class Product {
 	public Status getStatus() { return status; }
 	
 	public void setDepartment_Id(Long department_Id) { this.department_Id = department_Id; }
-	public void setCreated_At(int created_At) { this.created_At = created_At; }
+	public void setCreated_At(LocalDateTime created_At) { this.created_At = created_At; }
 	public void setProductName(String productName) { this.productName = productName; }
 	public void setDescription(String description) { this.description = description; }
 	public void setStockQuantity(int stockQuantity) { this.stockQuantity = stockQuantity; }
