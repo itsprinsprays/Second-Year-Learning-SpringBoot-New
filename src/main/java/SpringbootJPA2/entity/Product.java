@@ -14,11 +14,11 @@ import SpringbootJPA2.Status;
 
 @Entity
 @Table(name = "Product")
-public class Department {
+public class Product {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int department_Id;
+	private Long department_Id;
 	
 	@CreationTimestamp
 	private int created_at;
