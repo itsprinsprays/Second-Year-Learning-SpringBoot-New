@@ -2,6 +2,10 @@ package SpringbootJPA2.service;
 
 import org.springframework.stereotype.Service;
 
+import SpringbootJPA2.dto.CreateProductRequestDTO;
+import SpringbootJPA2.dto.CreateProductResponseDTO;
+import SpringbootJPA2.entity.Product;
+import SpringbootJPA2.mapper.ProductMapper;
 import SpringbootJPA2.repository.ProductRepository;
 
 @Service
@@ -14,5 +18,18 @@ public class ProductService {
 		}
 		
 		
+		public CreateProductResponseDTO createProduct(CreateProductRequestDTO dto) {
+			
+			Product product = new Product();	
+			product.setProductName(dto.getProductName());
+			product.setDescription(dto.getProductName());
+			product.setStockQuantity(dto.getStockQuantity());
+			product.setUnit(dto.getUnit());
+			
+			prepo.save(product);
+			
+			return ProductMapper.createResponse(product, "Product Created");
+			
+		}
 
 }
