@@ -8,6 +8,8 @@ import SpringbootJPA2.entity.Product;
 import SpringbootJPA2.mapper.ProductMapper;
 import SpringbootJPA2.repository.ProductRepository;
 
+import SpringbootJPA2.exception.DuplicateResourceException;
+
 @Service
 public class ProductService {
 	
@@ -20,7 +22,10 @@ public class ProductService {
 		
 		public CreateProductResponseDTO createProduct(CreateProductRequestDTO dto) {
 			
-			Product product = new Product();	
+			Product product = prepo.findByName(dto.getProductName())
+					.orElseThrow(() -> new DuplicateResourceException(dto.getProductName() + "is existing"));
+			
+				
 			product.setProductName(dto.getProductName());
 			product.setDescription(dto.getProductName());
 			product.setStockQuantity(dto.getStockQuantity());
