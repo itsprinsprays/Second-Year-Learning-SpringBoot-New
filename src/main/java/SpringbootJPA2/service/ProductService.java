@@ -1,5 +1,7 @@
 package SpringbootJPA2.service;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import SpringbootJPA2.mapper.ProductMapper;
 import SpringbootJPA2.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import SpringbootJPA2.exception.DuplicateResourceException;
+import SpringbootJPA2.exception.ResourceNotFoundException;
 
 @Service
 public class ProductService {
@@ -47,6 +50,13 @@ public class ProductService {
 			Page<Product> page = prepo.findAll(pageable);
 			
 			return ProductMapper.getAllProductResponse(page);
+		}
+		
+		public AllProductResponseDTO getProductById(Long Id) {
+			Product product = prepo.findById(Id)
+					.orElseThrow(() -> new ResourceNotFoundException(Id + " is not existing"));
+			
+			return ProductMapper.getByIdResponse(product);
 		}
 
 }

@@ -35,5 +35,17 @@ public class ProductMapper {
 			return dto;
 		});
 	}
+	
+	public static AllProductResponseDTO getByIdResponse(Product product) {
+			AllProductResponseDTO dto = new AllProductResponseDTO();
+			dto.setProduct_Id(product.getProduct_Id());
+			dto.setCreated_At(product.getCreated_At());
+			dto.setProductName(product.getProductName());
+			dto.setStockQuantity(product.getStockQuantity());
+			dto.setDescription(product.getDescription());
+			dto.setUnit(product.getUnit());
+			dto.setStatus(product.getStatus());
+			return dto;
+	}
 
 }
