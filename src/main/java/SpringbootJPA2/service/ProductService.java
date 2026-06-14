@@ -1,13 +1,16 @@
 package SpringbootJPA2.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import SpringbootJPA2.dto.AllProductResponseDTO;
 import SpringbootJPA2.dto.CreateProductRequestDTO;
 import SpringbootJPA2.dto.CreateProductResponseDTO;
 import SpringbootJPA2.entity.Product;
 import SpringbootJPA2.mapper.ProductMapper;
 import SpringbootJPA2.repository.ProductRepository;
-
+import jakarta.transaction.Transactional;
 import SpringbootJPA2.exception.DuplicateResourceException;
 
 @Service
@@ -19,11 +22,13 @@ public class ProductService {
 			this.prepo = prepo;
 		}
 		
-		
+		@Transactional
 		public CreateProductResponseDTO createProduct(CreateProductRequestDTO dto) {
 			
-			Product product = prepo.findByName(dto.getProductName())
-					.orElseThrow(() -> new DuplicateResourceException(dto.getProductName() + "is existing"));
+			if(prepo.existsByProductName(dto.getProductName()))
+				throw new DuplicateResourceException(dto.getProductName() + " is existing");
+						
+			Product product = new Product();
 			
 				
 			product.setProductName(dto.getProductName());
@@ -33,8 +38,15 @@ public class ProductService {
 			
 			prepo.save(product);
 			
-			return ProductMapper.createResponse(product, "Product Created");
+			return ProductMapper.createResponse(product);
 			
+		}
+		
+		public Page<AllProductResponseDTO> getAllProduct(Pageable pageable) {
+			
+			Page<Product> page = prepo.findAll(pageable);
+			
+			return ProductMapper.getAllProductResponse(page);
 		}
 
 }

@@ -1,50 +1,22 @@
-package SpringbootJPA2.entity;
+package SpringbootJPA2.dto;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.CreationTimestamp;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import SpringbootJPA2.Status;
 
-@Entity
-@Table(name = "Product")
-public class Product {
+public class AllProductResponseDTO {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long product_Id;
-	
-	@CreationTimestamp
 	private LocalDateTime created_At;
-	
-	@Column(nullable = false)
 	private String productName;
-	
-	@Column(nullable = false)
 	private String description;
-	
-	@Column(nullable = false)
 	private int stockQuantity;
-	
-	@Column(nullable = false) 
 	private String unit;
+	private Status status;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
-	private Status status = Status.ACTIVE;
+	public AllProductResponseDTO() { }
 	
-	
-	public Product() { }
-	
-	public Long getProduct_Id() { return product_Id; }
+	public Long getProduct_id() { return product_Id; }
 	public LocalDateTime getCreated_At() { return created_At; }
 	public String getProductName() { return productName; }
 	public String getDescription() { return description; }
@@ -59,10 +31,5 @@ public class Product {
 	public void setStockQuantity(int stockQuantity) { this.stockQuantity = stockQuantity; }
 	public void setUnit(String unit) { this.unit = unit; }
 	public void setStatus(Status status) { this.status = status; }
-	
-	
-	
-	
-	
 
-}
+ }

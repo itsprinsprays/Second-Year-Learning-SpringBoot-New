@@ -7,5 +7,6 @@ import SpringbootJPA2.entity.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-	Optional<Product> findByName(String name);
+	Optional<Product> findByProductName(String name);
+	boolean existsByProductName(String name);
 }
