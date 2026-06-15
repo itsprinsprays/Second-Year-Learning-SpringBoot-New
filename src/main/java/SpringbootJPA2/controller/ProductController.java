@@ -58,5 +58,10 @@ public class ProductController {
 	public ResponseEntity<AllProductResponseDTO> softDelete(@RequestBody SoftDeleteRequestDTO dto, @PathVariable Long Id) {
 		return ResponseEntity.ok().body(serv.softDeleteProduct(dto, Id));
 	}
+	
+	@PatchMapping("/RestockProduct")
+	public ResponseEntity<AllProductResponseDTO> restockProduct(@RequestBody RestockProductRequestDTO dto) {
+		return ResponseEntity.ok().body(serv.restockProductQuantity(dto));
+	}
 
 }
