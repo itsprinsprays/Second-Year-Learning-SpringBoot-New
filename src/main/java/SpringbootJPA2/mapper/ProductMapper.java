@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import SpringbootJPA2.dto.AllProductResponseDTO;
 import SpringbootJPA2.dto.CreateProductResponseDTO;
 import SpringbootJPA2.dto.DeleteProductResponseDTO;
+import SpringbootJPA2.dto.SoftDeleteRequestDTO;
 import SpringbootJPA2.entity.Product;
 
 @Component
@@ -57,5 +58,6 @@ public class ProductMapper {
 			dto.setMessage("Succesfully Deleted");
 			return dto;
 	}
+
 
 }
