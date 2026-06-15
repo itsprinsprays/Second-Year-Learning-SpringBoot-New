@@ -13,6 +13,7 @@ public class AllProductResponseDTO {
 	private int stockQuantity;
 	private String unit;
 	private Status status;
+	private String message;
 	
 	public AllProductResponseDTO() { }
 	
@@ -23,6 +24,7 @@ public class AllProductResponseDTO {
 	public int getStockQuantity() { return stockQuantity; }
 	public String getUnit() { return unit; }
 	public Status getStatus() { return status; }
+	public String getMessage() { return message; }
 	
 	public void setProduct_Id(Long product_Id) { this.product_Id = product_Id; }
 	public void setCreated_At(LocalDateTime created_At) { this.created_At = created_At; }
@@ -31,5 +33,5 @@ public class AllProductResponseDTO {
 	public void setStockQuantity(int stockQuantity) { this.stockQuantity = stockQuantity; }
 	public void setUnit(String unit) { this.unit = unit; }
 	public void setStatus(Status status) { this.status = status; }
-
+	public void setMessage(String message) { this.message = message; }	
  }
