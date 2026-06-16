@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.prince.ems.exception.InvalidTokenException;
 import com.prince.ems.exception.TokenExpiredException;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -77,10 +78,17 @@ public class JwtUtil {
 		
 	}
 	
+	public Claims extractAllClaims(String token) {
+		return Jwts.parserBuilder()
+				.setSigningKey(SECRET)
+				.build()
+				.parseClaimsJws(token)
+				.getBody();
+	}
 	
-	
-	
-	
-	
-	
+	public String extractUsername(String token) {
+		return extractAllClaims(token).getSubject();
+	}
+		
 }
+	
