@@ -8,5 +8,4 @@ import SpringbootJPA1.entity.Employee;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	boolean existsByContactNumber(String contactNumber);
- 
 }
