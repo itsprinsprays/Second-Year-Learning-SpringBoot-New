@@ -84,6 +84,9 @@ public class JwtUtil {
 				.getBody();
 	}
 	
+	public String extractUsername(String username) {
+		return extractAllClaims(username).getSubject();
+	}
 	
 	
 	
