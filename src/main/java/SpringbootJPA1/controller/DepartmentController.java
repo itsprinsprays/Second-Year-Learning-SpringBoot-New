@@ -20,7 +20,7 @@ import jakarta.validation.Valid;
 
 @Validated
 @RestController
-@RequestMapping("/department")
+@RequestMapping("ems/department")
 public class DepartmentController {
 	
 	private final DepartmentService serv;

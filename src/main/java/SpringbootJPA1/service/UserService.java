@@ -29,7 +29,7 @@ public class UserService {
 		if(urepo.existsByUsername(dto.getUsername()))
 			throw new DuplicateResourceException("Username is existing");
 		
-		Employee employee = erepo.findByEmployeeId(dto.getEmployee_Id())
+		Employee employee = erepo.findByEID(dto.getEmployee_Id())
 				.orElseThrow(() -> new ResourceNotFoundException("Employee Id is not existing"));
 		
 		if(!employee.getName().equalsIgnoreCase(dto.getUsername()))
