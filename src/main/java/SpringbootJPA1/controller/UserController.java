@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import SpringbootJPA1.dto.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 	
 	private final UserService serv;
