@@ -1,5 +1,6 @@
 package SpringbootJPA1.service;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import SpringbootJPA1.dto.CreateAccountRequestDTO;
@@ -17,10 +18,12 @@ public class UserService {
 
 	private final UserRepository urepo;
 	private final EmployeeRepository erepo;
+	private final PasswordEncoder passwordEncoder;
 	
-	public UserService(UserRepository urepo, EmployeeRepository erepo) {
+	public UserService(UserRepository urepo, EmployeeRepository erepo, PasswordEncoder passwordEncoder) {
 		this.urepo = urepo;
 		this.erepo = erepo;
+		this.passwordEncoder = passwordEncoder;
 	}
 	
 	public CreateAccountResponseDTO registerUser(CreateAccountRequestDTO dto) {
@@ -38,7 +41,7 @@ public class UserService {
 		User user = new User();
 		
 		user.setUsername(dto.getUsername());
-		user.setPassword(dto.getPassword());
+		user.setPassword(passwordEncoder.encode(dto.getPassword()));
 		user.setRole(dto.getRole());
 		user.setEmployee(employee);
 		
