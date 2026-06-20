@@ -1,6 +1,7 @@
 package SpringbootJPA1.mapper;
 
 import SpringbootJPA1.dto.CreateAccountResponseDTO;
+import SpringbootJPA1.dto.LoginResponseDTO;
 import SpringbootJPA1.entity.User;
 
 public class UserMapper {
@@ -13,6 +14,13 @@ public class UserMapper {
 		dto.setUsername(user.getUsername());
 		dto.setRole(user.getRole());
 		dto.setMessage(message);
+		return dto;
+	}
+	
+	public static LoginResponseDTO loginTokenResponse(String token) {
+		LoginResponseDTO dto = new LoginResponseDTO();
+		
+		dto.setAccessToken(token);
 		return dto;
 	}
 	
