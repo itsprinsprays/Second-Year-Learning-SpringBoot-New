@@ -32,6 +32,7 @@ public class AuthService {
 						));
 		} catch(Exception e) {
 			throw new ResourceNotFoundException("Invalid Username or password");
+			
 		}
 		
 		String token = util.generateToken(dto.getUsername());

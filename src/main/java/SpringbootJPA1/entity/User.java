@@ -31,7 +31,6 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	public Role role;
 	
-	
 	@OneToOne
 	@JoinColumn(name = "employeeId", nullable = false)
 	private Employee employee;
