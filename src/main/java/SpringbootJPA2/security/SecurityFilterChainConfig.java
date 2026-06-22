@@ -1,4 +1,4 @@
-package SpringbootJPA2.repository;
+package SpringbootJPA2.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,24 +13,22 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityFilterChainConfig {
 	
 	private final JwtAuthenticationFilter jwtAuthenticationFilter;
-	
+
 	public SecurityFilterChainConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
 		this.jwtAuthenticationFilter = jwtAuthenticationFilter;
 	}
 	
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain filter(HttpSecurity http) throws Exception{
 		
 		return http
 				.csrf(csrf -> csrf.disable())
-				.authorizeHttpRequests(auth -> auth
-				
-						.requestMatchers(HttpMethod.POST, "api/").permitAll()
+				.authorizeHttpRequests(https -> https
+						.requestMatchers(HttpMethod.POST, "/api").permitAll()
 						.anyRequest().authenticated()
-				
 						)
-		.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-		.build(); 
+				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+				.build();
 	}
-
+	
 }
