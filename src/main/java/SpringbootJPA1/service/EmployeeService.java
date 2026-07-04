@@ -59,6 +59,13 @@ public class EmployeeService {
 			
 	}
 	
+	public EmployeeResponseDTO getEmployeeById(Long Id) {
+		Employee employee = empRepo.findByEID(Id)
+				.orElseThrow(() -> new ResourceNotFoundException(""));
+		
+		return EmployeeMapper.toResponseOne(employee, "");
+	}
+	
 	//Updating the data of an employee using their id
 	@Transactional
 	public EmployeeResponseDTO UpdateEmployee(UpdateEmployeeRequestDTO dto, int id) {

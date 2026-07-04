@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -26,6 +27,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/employees")
 @Validated
@@ -63,9 +65,15 @@ public class EmployeeController {
 	        return ResponseEntity.status(HttpStatus.CREATED).body(response);	 //.status for signals that theres new creation
 	}
 	
-	@GetMapping
+	@GetMapping("/all")
 	public ResponseEntity<List<EmployeeResponseDTO>> getAllEmployee() {
 		 return ResponseEntity.ok(serv.getAllEmployee()); //will return that something is succesfully operate
+	}
+	
+	@CrossOrigin(origins = "http://127.0.0.1:5500")
+	@GetMapping("/{Id}")
+	public ResponseEntity<EmployeeResponseDTO> getEmployeeById(@PathVariable Long Id) {
+		return ResponseEntity.ok().body(serv.getEmployeeById(Id));
 	}
 	
 	@PatchMapping("/{id}")

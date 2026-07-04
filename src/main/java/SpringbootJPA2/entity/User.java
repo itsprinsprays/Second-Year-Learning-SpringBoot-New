@@ -13,7 +13,7 @@ import jakarta.persistence.Enumerated;
 
 
 @Entity
-@Table(name = "user")
+@Table(name = "Security_User")
 
 public class User {
 	

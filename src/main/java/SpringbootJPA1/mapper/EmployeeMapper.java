@@ -27,6 +27,18 @@ public class EmployeeMapper {
     			return dto;
     }
     
+    public static EmployeeResponseDTO toResponseOne(Employee employee, String message) {
+		EmployeeResponseDTO dto = new EmployeeResponseDTO();
+		dto.setEID(employee.getEID());
+		dto.setDeptId(employee.getDepartment().getDepartmentID());
+		dto.setName(employee.getName());
+		dto.setContactNumber(employee.getContactNumber());
+		dto.setAge(employee.getAge());
+		dto.setDepartmentName(employee.getDepartment().getDepartmentName());
+		return dto;
+}
+
+    
     
 //    public static List<EmployeeResponseDTO> allEmployeeResponse(List<Employee> employee) {
 //    	
