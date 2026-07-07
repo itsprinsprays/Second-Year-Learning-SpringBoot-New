@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import SpringbootJPA3.dto.GetCourseResponseDTO;
 import SpringbootJPA3.entity.Course;
+import SpringbootJPA3.exception.ResourceNotFoundException;
 import SpringbootJPA3.mapper.CourseMapper;
 import SpringbootJPA3.repository.CourseRepository;
 
@@ -18,10 +19,10 @@ public class CourseService {
 		this.mapper = mapper;
 	}
 	
-	public GetCourseResponseDTO getCourseById(Long Id) throws Exception {
+	public GetCourseResponseDTO getCourseById(Long Id) {
 		
 		Course course = crepo.findByCourseId(Id)
-				.orElseThrow(() -> new Exception("Course ID is not Existing"));
+				.orElseThrow(() -> new ResourceNotFoundException("Course ID is not Existing"));
 		
 		return mapper.toResponse(course);
 		
